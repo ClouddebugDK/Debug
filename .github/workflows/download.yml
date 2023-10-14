@@ -6,6 +6,9 @@ jobs:
   download-file:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Download file
         run: |
           wget -O Get-IntuneManagementExtensionDiagnostics.ps1 https://raw.githubusercontent.com/petripaavola/Get-IntuneManagementExtensionDiagnostics/main/Get-IntuneManagementExtensionDiagnostics.ps1

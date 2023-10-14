@@ -1,0 +1,24 @@
+name: Scrape
+
+on:
+  schedule:
+    - cron: "0 8 * * *" # 8 a.m. every day UTC
+  workflow_dispatch:
+
+jobs:
+  push_to_branch_and_create_pr:
+    name: Create a PR with the sound
+    if: "(contains(github.event.comment.body, ' pr ')) && ((contains(github.event.comment.author_association, 'OWNER') || contains(github.event.comment.user.login, 'librehsbot')) && (github.event.issue.number == 1))"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      name: Check out current commit
+
+    - uses: suisei-cn/actions-download-file@v1
+      id: downloadfile
+      name: Download the file
+      with:
+          url: https://github.com/petripaavola/Get-IntuneManagementExtensionDiagnostics/blob/main/Get-IntuneManagementExtensionDiagnostics.ps1
+          target: assets
+        
+    

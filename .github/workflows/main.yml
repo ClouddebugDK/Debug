@@ -11,8 +11,8 @@ jobs:
           wget -O Get-IntuneManagementExtensionDiagnostics.ps1 https://raw.githubusercontent.com/petripaavola/Get-IntuneManagementExtensionDiagnostics/main/Get-IntuneManagementExtensionDiagnostics.ps1
       - name: Commit changes
         run: |
-          git config --global user.name 'Your Name'
-          git config --global user.email 'youremail@example.com'
+          git config --global user.name 'ClouddebugDK'
+          git config --global user.email 'elmholt@outlook.com'
           git add Get-IntuneManagementExtensionDiagnostics.ps1
           git commit -m "Add Get-IntuneManagementExtensionDiagnostics.ps1"
           git push

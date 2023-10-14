@@ -1,0 +1,35 @@
+name: Download File Action
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write 
+
+jobs:
+  download-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          Repository: "ClouddebugDK/Debug"
+          token: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Create scripts directory
+        run: |
+          mkdir -p Scripts
+      
+      - name: Download file
+        run: |
+          wget -O Scripts/Get-IntuneManagementExtensionDiagnostics.ps1 https://raw.githubusercontent.com/petripaavola/Get-IntuneManagementExtensionDiagnostics/main/Get-IntuneManagementExtensionDiagnostics.ps1
+
+          
+      - name: Add and commit changes
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add Scripts/Get-IntuneManagementExtensionDiagnostics.ps1
+          git commit -m "Add Get-IntuneManagementExtensionDiagnostics.ps1"
+          git push

@@ -1,0 +1,15 @@
+# Install the required NuGet provider if not already installed
+if (-not (Get-PackageProvider -Name NuGet -ListAvailable)) {
+    Install-PackageProvider -Name NuGet -Force
+}
+
+# Install the ClipboardTools module
+Install-Module -Name ClipboardTools -Force -Scope CurrentUser
+
+# Check if the module was installed successfully and import it
+if (Get-Module -Name ClipboardTools -ListAvailable) {
+    Import-Module -Name ClipboardTools -Force
+    Write-Host "ClipboardTools module has been installed and imported successfully."
+} else {
+    Write-Host "Failed to install ClipboardTools module."
+}

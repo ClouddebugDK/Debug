@@ -1,5 +1,5 @@
 # Install the required NuGet provider if not already installed
-if (-not (Get-PackageProvider -Name NuGet -ListAvailable)) {
+if (-not (Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction SilentlyContinue)) {
     Install-PackageProvider -Name NuGet -Force
 }
 

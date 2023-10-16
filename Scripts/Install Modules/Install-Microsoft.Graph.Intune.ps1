@@ -7,11 +7,7 @@ if (-not (Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction SilentlyCo
 $requiredModules = @("Microsoft.Graph.Intune")
 
 foreach ($module in $requiredModules) {
-    if (-not (Get-Module -Name $module -ListAvailable)) {
-        Install-Module -Name $module -Force -Scope CurrentUser
-        Write-Host "$module module has been installed."
-    } else {
-        Write-Host "$module module already exists. Checking for updates."
+    if (Get-Module -Name $module -ListAvailable) {
         $latestVersion = (Find-Module -Name $module).Version
         $installedVersion = (Get-Module -Name $module).Version
 
@@ -21,5 +17,8 @@ foreach ($module in $requiredModules) {
         } else {
             Write-Host "Latest version of $module module is already installed."
         }
+    } else {
+        Install-Module -Name $module -Force -Scope CurrentUser
+        Write-Host "$module module has been installed."
     }
 }
